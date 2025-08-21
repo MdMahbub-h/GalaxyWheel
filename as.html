@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>3-Reel Slot Machine</title>
+        <script src="https://cdn.jsdelivr.net/npm/phaser@3.80.1/dist/phaser.min.js"></script>
+        <style>
+            body {
+                margin: 0;
+                background: #222;
+                color: white;
+                font-family: sans-serif;
+                text-align: center;
+            }
+            canvas {
+                display: block;
+                margin: 0 auto;
+            }
+        </style>
+    </head>
+    <body>
+        <script>
+            const config = {
+                type: Phaser.AUTO,
+                width: 400,
+                height: 300,
+                backgroundColor: "#000000",
+                scene: {
+                    preload,
+                    create,
+                },
+            };
+
+            const game = new Phaser.Game(config);
+
+            function preload() {}
+
+            function create() {
+                const scene = this;
+                const symbols = ["A", "B"];
+                const reelCount = 3;
+                const rows = 3;
+                const symbolHeight = 50;
+
+                // Store all symbol text objects for each reel
+                let reels = [];
+
+                // Create 3 reels
+                for (let i = 0; i < reelCount; i++) {
+                    let reel = [];
+
+                    for (let j = 0; j < rows + 3; j++) {
+                        const symbol = Phaser.Utils.Array.GetRandom(symbols);
+                        const text = scene.add
+                            .text(80 + i * 80, j * symbolHeight, symbol, {
+                                fontSize: "40px",
+                                color: "#fff",
+                            })
+                            .setOrigin(0.5);
+                        reel.push(text);
+                    }
+
+                    reels.push(reel);
+                }
+
+                // Spin Button
+                const btn = scene.add
+                    .text(200, 270, "SPIN", {
+                        fontSize: "28px",
+                        backgroundColor: "#0f0",
+                        color: "#000",
+                        padding: { x: 10, y: 5 },
+                    })
+                    .setOrigin(0.5)
+                    .setInteractive();
+
+                btn.on("pointerdown", spinReels);
+
+                function spinReels() {
+                    btn.setInteractive(false);
+
+                    reels.forEach((reel, index) => {
+                        // Delay each reel stop
+                        scene.time.delayedCall(index * 400, () => {
+                            spinReel(reel, () => {
+                                if (index === reels.length - 1) {
+                                    btn.setInteractive(true); // Reactivate button after last reel
+                                }
+                            });
+                        });
+                    });
+                }
+
+                function spinReel(reel, onComplete) {
+                    // Replace symbols
+                    reel.forEach((symbol, i) => {
+                        symbol.setText(Phaser.Utils.Array.GetRandom(symbols));
+                    });
+
+                    // Animate upward then reset
+                    const duration = 600;
+                    const distance = symbolHeight * 3;
+
+                    const tween = scene.tweens.add({
+                        targets: reel,
+                        y: `-=${distance}`,
+                        ease: "Cubic.easeInOut",
+                        duration: duration,
+                        onComplete: () => {
+                            // Reset symbol positions and randomize top 3
+                            reel.forEach((symbol, i) => {
+                                symbol.y += distance;
+
+                                if (i < 3) {
+                                    symbol.setText(
+                                        Phaser.Utils.Array.GetRandom(symbols)
+                                    );
+                                }
+                            });
+
+                            if (onComplete) onComplete();
+                        },
+                    });
+                }
+            }
+        </script>
+    </body>
+</html>
