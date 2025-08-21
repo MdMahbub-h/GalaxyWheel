@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Admin Panel</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <meta
+            name="viewport"
+            content="width=device-width, user-scalable=no, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0,minimal-ui"
+        />
+        <meta name="msapplication-tap-highlight" content="no" />
+
+        <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="stylesheet" href="/css/reset.css" type="text/css" />
+        <link rel="stylesheet" href="/css/admin.css" type="text/css" />
+
+        <script
+            type="text/javascript"
+            src="/js/lib/jquery-3.2.1.min.js"
+        ></script>
+    </head>
+
+    <body ondragstart="return false;" ondrop="return false;">
+        <div class="container">
+            <h1 class="title">Admin Panel</h1>
+
+            <%- include('navbar') %>
+
+            <h2 class="sub-title">Settings</h2>
+
+            <% if (hasMessages) { %>
+            <section class="messages success">
+                <% messages.forEach(function(message) { %>
+                <p><%= message %></p>
+                <% }); %>
+            </section>
+            <% } else if (hasErrors) { %>
+            <section class="messages error">
+                <% errors.forEach(function(error) { %>
+                <p><%= error %></p>
+                <% }); %>
+            </section>
+            <% } %>
+
+            <form method="post" action="/admin/settings">
+                <div class="content">
+                    <div class="form-row">
+                        <div>
+                            <label for="segment_1">
+                                <span>Anchor</span>
+                                <span id="segment_pct_1" class="percent"
+                                    >(<%=settings?.segment_1 || 0 %>%)</span
+                                ></label
+                            >
+                            <input type="range" id="segment_1" name="segment_1"
+                            min=="0" max="100" step="1" value="<%=
+                            settings?.segment_1 || 0 %>" required />
+                        </div>
+                        <div>
+                            <label for="segment_2"
+                                ><span>Rabbit foot</span>
+                                <span id="segment_pct_2" class="percent"
+                                    >(<%=settings?.segment_2 || 0 %>%)</span
+                                ></label
+                            >
+                            <input type="range" id="segment_2" name="segment_2"
+                            min=="0" max="100" step="1" value="<%=
+                            settings?.segment_2 || 0 %>" required />
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div>
+                            <label for="segment_3"
+                                ><span>Key</span>
+                                <span id="segment_pct_3" class="percent"
+                                    >(<%=settings?.segment_3 || 0 %>%)</span
+                                ></label
+                            >
+                            <input type="range" id="segment_3" name="segment_3"
+                            min=="0" max="100" step="1" value="<%=
+                            settings?.segment_3 || 0 %>" required />
+                        </div>
+                        <div>
+                            <label for="segment_4"
+                                ><span>Horseshoe</span>
+                                <span id="segment_pct_4" class="percent"
+                                    >(<%=settings?.segment_4 || 0 %>%)</span
+                                ></label
+                            >
+                            <input type="range" id="segment_4" name="segment_4"
+                            min=="0" max="100" step="1" value="<%=
+                            settings?.segment_4 || 0 %>" required />
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div>
+                            <label for="segment_5"
+                                ><span>Shamrock</span>
+                                <span id="segment_pct_5" class="percent"
+                                    >(<%=settings?.segment_5 || 0 %>%)</span
+                                ></label
+                            >
+                            <input type="range" id="segment_5" name="segment_5"
+                            min=="0" max="100" step="1" value="<%=
+                            settings?.segment_5 || 0 %>" required />
+                        </div>
+                        <div>
+                            <label for="segment_6"
+                                ><span>Crown</span>
+                                <span id="segment_pct_6" class="percent"
+                                    >(<%=settings?.segment_6 || 0 %>%)</span
+                                ></label
+                            >
+                            <input type="range" id="segment_6" name="segment_6"
+                            min=="0" max="100" step="1" value="<%=
+                            settings?.segment_6 || 0 %>" required />
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div>
+                            <label for="segment_7"
+                                ><span>Galaxy Coin 1</span>
+                                <span id="segment_pct_7" class="percent"
+                                    >(<%=settings?.segment_7 || 0 %>%)</span
+                                ></label
+                            >
+                            <input type="range" id="segment_7" name="segment_7"
+                            min=="0" max="100" step="1" value="<%=
+                            settings?.segment_7 || 0 %>" required />
+                        </div>
+                        <div>
+                            <label for="segment_8"
+                                ><span>Galaxy Coin 2</span>
+                                <span id="segment_pct_8" class="percent"
+                                    >(<%=settings?.segment_8 || 0 %>%)</span
+                                ></label
+                            >
+                            <input type="range" id="segment_8" name="segment_8"
+                            min=="0" max="100" step="1" value="<%=
+                            settings?.segment_8 || 0 %>" required />
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div>
+                            <label for="segment_9"
+                                ><span>Galaxy Coin 3</span>
+                                <span id="segment_pct_9" class="percent"
+                                    >(<%=settings?.segment_9 || 0 %>%)</span
+                                ></label
+                            >
+                            <input type="range" id="segment_9" name="segment_9"
+                            min=="0" max="100" step="1" value="<%=
+                            settings?.segment_9 || 0 %>" required />
+                        </div>
+                        <div>
+                            <label for="segment_10"
+                                ><span>Galaxy Coin 4</span>
+                                <span id="segment_pct_10" class="percent"
+                                    >(<%=settings?.segment_10 || 0 %>%)</span
+                                ></label
+                            >
+                            <input type="range" id="segment_10"
+                            name="segment_10" min=="0" max="100" step="1"
+                            value="<%= settings?.segment_10 || 0 %>" required />
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div>
+                            <label for="segment_11"
+                                ><span>Galaxy Coin 5</span>
+                                <span id="segment_pct_11" class="percent"
+                                    >(<%=settings?.segment_11 || 0 %>%)</span
+                                ></label
+                            >
+                            <input type="range" id="segment_11"
+                            name="segment_11" min=="0" max="100" step="1"
+                            value="<%= settings?.segment_11 || 0 %>" required />
+                        </div>
+                        <div>
+                            <label for="segment_12"
+                                ><span>Galaxy Coin 6</span>
+                                <span id="segment_pct_12" class="percent"
+                                    >(<%=settings?.segment_12 || 0 %>%)</span
+                                ></label
+                            >
+                            <input type="range" id="segment_12"
+                            name="segment_12" min=="0" max="100" step="1"
+                            value="<%= settings?.segment_12 || 0 %>" required />
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div>
+                            <label for="eye_bonus_no"
+                                ><span>Eye Bonus No</span>
+                                <span id="eye_bonus_pct_no" class="percent"
+                                    >(<%=settings?.eye_bonus_no || 0 %>%)</span
+                                ></label
+                            >
+                            <input type="range" id="eye_bonus_no"
+                            name="eye_bonus_no" min=="0" max="100" step="1"
+                            value="<%= settings?.eye_bonus_no || 0 %>" required
+                            />
+                        </div>
+                        <div>
+                            <label for="eye_bonus_half"
+                                ><span>Eye Bonus Half</span>
+                                <span id="eye_bonus_pct_half" class="percent"
+                                    >(<%=settings?.eye_bonus_half || 0
+                                    %>%)</span
+                                ></label
+                            >
+                            <input type="range" id="eye_bonus_half"
+                            name="eye_bonus_half" min=="0" max="100" step="1"
+                            value="<%= settings?.eye_bonus_half || 0 %>"
+                            required />
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div>
+                            <label for="eye_bonus_full"
+                                ><span>Eye Bonus Full</span>
+                                <span id="eye_bonus_pct_full" class="percent"
+                                    >(<%=settings?.eye_bonus_full || 0
+                                    %>%)</span
+                                ></label
+                            >
+                            <input type="range" id="eye_bonus_full"
+                            name="eye_bonus_full" min=="0" max="100" step="1"
+                            value="<%= settings?.eye_bonus_full || 0 %>"
+                            required />
+                        </div>
+                        <div></div>
+                    </div>
+                    <div class="form-row">
+                        <div class="total-pcts">
+                            <div>
+                                Total Segments Percentage:
+                                <span id="total_segment_pct"
+                                    >(<%= settings? settings.segment_1 +
+                                    settings.segment_2 + settings.segment_3 +
+                                    settings.segment_4 + settings.segment_5 +
+                                    settings.segment_6 + settings.segment_7 +
+                                    settings.segment_8 + settings.segment_9 +
+                                    settings.segment_10 + settings.segment_11 +
+                                    settings.segment_12 : 0 %>%)
+                                </span>
+                            </div>
+                        </div>
+                        <div class="total-pcts">
+                            <div>
+                                Total Eye Bonus Percentage:
+                                <span id="total_eye_bonus_pct"
+                                    >(<%= settings? settings.eye_bonus_no +
+                                    settings.eye_bonus_half +
+                                    settings.eye_bonus_full : 0 %>%)</span
+                                >
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div>
+                            <input type="submit" value="Submit" />
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <script type="text/javascript" src="/js/settings.js"></script>
+    </body>
+</html>

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Admin Panel</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <meta
+            name="viewport"
+            content="width=device-width, user-scalable=no, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0,minimal-ui"
+        />
+        <meta name="msapplication-tap-highlight" content="no" />
+
+        <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="stylesheet" href="/css/reset.css" type="text/css" />
+        <link rel="stylesheet" href="/css/admin.css" type="text/css" />
+
+        <script
+            type="text/javascript"
+            src="/js/lib/jquery-3.2.1.min.js"
+        ></script>
+    </head>
+
+    <body ondragstart="return false;" ondrop="return false;">
+        <div class="container">
+            <h1 class="title">Admin Panel</h1>
+
+            <%- include('navbar') %>
+
+            <h2 class="sub-title">History</h2>
+
+            <% if (hasMessages) { %>
+            <section class="messages success">
+                <% messages.forEach(function(message) { %>
+                <p><%= message %></p>
+                <% }); %>
+            </section>
+            <% } else if (hasErrors) { %>
+            <section class="messages error">
+                <% errors.forEach(function(error) { %>
+                <p><%= error %></p>
+                <% }); %>
+            </section>
+            <% } %>
+
+            <section class="history">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Date/Time</th>
+                            <th>Result</th>
+                            <th>Bonus Result</th>
+                            <th>Odds</th>
+                            <!-- <th>Action</th>  -->
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% history.forEach(function(item) { %>
+                        <tr>
+                            <td><%= item.date_time.toLocaleString() %></td>
+                            <!-- <td>
+                                <%= new Date(item.date_time).toLocaleString() %>
+                            </td> -->
+                            <td><%= item.result %></td>
+                            <td><%= item.bonus_result %></td>
+                            <td><%= item.odds %></td>
+                            <!-- <td>
+                                <form
+                                    action="/admin/history/<%= // item.id %>"
+                                    method="POST"
+                                >
+                                    <button type="submit">Delete</button>
+                                </form>
+                            </td> -->
+                        </tr>
+                        <% }); %>
+                    </tbody>
+                </table>
+
+                <div class="pagination">
+                    <% if (skip > 0) { %>
+                    <a href="/admin?skip=<%= skip - limit %>&limit=<%= limit %>"
+                        >Prev</a
+                    >
+                    <% } %>
+                    <span>Page: <%= Math.floor(skip / limit) + 1 %></span>
+                    <% if (history.length === limit) { %>
+                    <a href="/admin?skip=<%= skip + limit %>&limit=<%= limit %>"
+                        >Next</a
+                    >
+                    <% } %>
+                </div>
+            </section>
+        </div>
+    </body>
+</html>

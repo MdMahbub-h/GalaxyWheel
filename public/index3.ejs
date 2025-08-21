@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <link rel="icon" type="image/png" href="./favicon.png" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Spin</title>
+
+        <script
+            type="module"
+            crossorigin
+            src="./assets/index-OV9criDG.js"
+        ></script>
+        <link rel="stylesheet" crossorigin href="./assets/index-DHoyXRiG.css" />
+    </head>
+
+    <body>
+        <div id="app">
+            <div id="phaser-container"></div>
+        </div>
+        <script>
+            var settings = `<%- settings %>`;
+            try {
+                window.SETTINGS = JSON.parse(settings);
+                console.log(SETTINGS);
+            } catch (error) {
+                window.SETTINGS = null;
+                console.log(error);
+            }
+        </script>
+    </body>
+</html>

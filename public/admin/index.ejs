@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Admin Panel</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0,minimal-ui" />
+    <meta name="msapplication-tap-highlight" content="no" />
+
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="stylesheet" href="/css/reset.css" type="text/css" />
+    <link rel="stylesheet" href="/css/admin.css" type="text/css" />
+
+    <script type="text/javascript" src="/js/lib/jquery-3.2.1.min.js"></script>
+</head>
+
+<body ondragstart="return false;" ondrop="return false;">
+    <div class="container">
+        <h1 class="title">Admin Panel</h1>
+
+        <%- include('navbar') %>
+
+        <h2 class="sub-title">Home</h2>
+
+
+        <% if (hasMessages) { %>
+        <section class="messages success">
+            <% messages.forEach(function(message) { %>
+            <p><%= message %></p>
+            <% }); %>
+        </section>
+        <% } else if (hasErrors) { %>
+        <section class="messages error">
+            <% errors.forEach(function(error) { %>
+            <p><%= error %></p>
+            <% }); %>
+        </section>
+        <% } %>
+
+    </div>
+</body>
+
+</html>
